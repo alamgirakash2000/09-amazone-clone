@@ -8,15 +8,16 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <Header />
         <Switch>
           <Route path="/checkout">
+            <Header />
             <h2>Wait for the Checkout Page</h2>
           </Route>
           <Route path="/login">
             <h2>Wait for the Login Page</h2>
           </Route>
-          <Route path="/">
+          <Route exact path="/">
+            <Header />
             <h2>HOME Page!!!</h2>
           </Route>
         </Switch>

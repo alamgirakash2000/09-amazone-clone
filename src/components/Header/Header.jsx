@@ -1,10 +1,64 @@
 import React from "react";
 import "./Header.style.css";
+import { Link } from "react-router-dom";
+import SearchIcon from "@material-ui/icons/Search";
 
 function Header() {
   return (
     <div>
-      <h1>This is header</h1>
+      <nav className="header">
+        {/*Logo on the left ->img*/}
+        <Link to="/">
+          <img
+            src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+            alt=""
+            className="header__logo"
+          />
+        </Link>
+        {/*Search Box*/}
+        <div className="input-group my-auto">
+          <input
+            type="text"
+            className="form-control"
+            aria-describedby="basic-addon2"
+          />
+          <div className="input-group-append">
+            <span className="input-group-text" id="basic-addon2">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+        </div>
+        {/*3 Links*/}
+        <div className="header__nav">
+          <Link to="/login" className="header__link">
+            <div className="d-flex flex-column header__option">
+              <span className="header__optionLine_one">Hello Akash</span>
+              <span className="header__optionLine_two">Sign In</span>
+            </div>
+          </Link>
+          <Link to="/login" className="header__link">
+            <div className="d-flex flex-column header__option">
+              <span className="header__optionLine_one">Returns</span>
+              <span className="header__optionLine_two">& Orders</span>
+            </div>
+          </Link>
+          <Link to="/login" className="header__link">
+            <div className="d-flex flex-column header__option">
+              <span className="header__optionLine_one">Your</span>
+              <span className="header__optionLine_two">Prime</span>
+            </div>
+          </Link>
+
+          <Link to="/checkout" className="header__link">
+            <div className="header__optionBasket">
+              <span>
+                <i class="fas fa-shopping-cart fa-2x"></i>
+              </span>
+              <span className="mx-2">0</span>
+            </div>
+          </Link>
+        </div>
+      </nav>
     </div>
   );
 }

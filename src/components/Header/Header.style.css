@@ -1,0 +1,46 @@
+.header {
+  background-color: #131921;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.header__logo {
+  width: 100px;
+  margin: 0 20px;
+  margin-top: 18px;
+}
+.input-group {
+  flex: 1;
+}
+.form-control {
+  width: 100%;
+}
+.input-group-append {
+  background-color: #cd9042 !important;
+  margin: 0;
+}
+#basic-addon2 {
+  background: none !important;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header__link {
+  color: white;
+  margin: auto 1rem;
+  text-decoration: none;
+}
+
+.header__optionLine_one {
+  font-size: 10px;
+}
+.header__optionLine_two {
+  font-size: 13px;
+  font-weight: 800;
+}
