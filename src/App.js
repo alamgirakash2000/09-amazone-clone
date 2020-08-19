@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
 
@@ -10,13 +10,13 @@ function App() {
       <div className="app">
         <Header />
         <Switch>
-          <Route path="/09-amazone-clone/checkout">
+          <Route path="/checkout">
             <h2>Wait for the Checkout Page</h2>
           </Route>
-          <Route path="/09-amazone-clone/login">
+          <Route path="/login">
             <h2>Wait for the Login Page</h2>
           </Route>
-          <Route path="/09-amazone-clone/">
+          <Route path="/">
             <h2>HOME Page!!!</h2>
           </Route>
         </Switch>
