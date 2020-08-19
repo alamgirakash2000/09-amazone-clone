@@ -10,13 +10,13 @@ function App() {
       <div className="app">
         <Header />
         <Switch>
-          <Route path="/checkout">
+          <Route path="/09-amazone-clone/checkout">
             <h2>Wait for the Checkout Page</h2>
           </Route>
-          <Route path="/login">
+          <Route path="/09-amazone-clone/login">
             <h2>Wait for the Login Page</h2>
           </Route>
-          <Route path="/">
+          <Route path="/09-amazone-clone/">
             <h2>HOME Page!!!</h2>
           </Route>
         </Switch>
