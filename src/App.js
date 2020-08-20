@@ -3,6 +3,7 @@ import "./App.css";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
+import Home from "./pages/Home/Home";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           </Route>
           <Route exact path="/">
             <Header />
-            <h2>HOME Page!!!</h2>
+            <Home />
           </Route>
         </Switch>
       </div>
