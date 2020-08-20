@@ -36,7 +36,9 @@
   margin: auto 1rem;
   text-decoration: none;
 }
-
+.header__link:hover {
+  text-decoration: none;
+}
 .header__optionLine_one {
   font-size: 10px;
 }

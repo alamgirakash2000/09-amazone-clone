@@ -1,0 +1,25 @@
+.checkout__ad {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.checkoutProduct {
+  background: white;
+}
+
+.checkoutProduct__image {
+  object-fit: contain;
+  height: 150px;
+  width: 150px;
+}
+.checkoutProduct__button {
+  background-color: #f0c14b;
+  border: 1px solid;
+  border-color: #a88734 #9c7e31 #846a29;
+}
+.subtotal {
+  background: white;
+  padding: 1rem;
+  margin-top: 1rem;
+  text: center;
+}
