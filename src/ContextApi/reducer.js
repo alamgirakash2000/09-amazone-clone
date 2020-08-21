@@ -1,20 +1,5 @@
 export const initialState = {
-  basket: [
-    {
-      id: "0001",
-      title: "Harry Potter and the Philosopher's Stone",
-      price: 10.49,
-      rating: 5,
-      image: "https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg",
-    },
-    {
-      id: "0001",
-      title: "Harry Potter and the Philosopher's Stone",
-      price: 10.49,
-      rating: 5,
-      image: "https://m.media-amazon.com/images/I/51UoqRAxwEL.jpg",
-    },
-  ],
+  basket: [],
   user: null,
 };
 
@@ -29,6 +14,11 @@ export const getBasketTotal = (basket) => {
 const reducer = (state, action) => {
   console.log(action);
   switch (action.type) {
+    case "SET_USER":
+      return {
+        ...state,
+        user: action.user,
+      };
     case "ADD":
       // Logic for adding item to basket
       return {

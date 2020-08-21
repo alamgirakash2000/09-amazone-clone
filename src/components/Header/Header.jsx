@@ -3,9 +3,17 @@ import "./Header.style.css";
 import { Link } from "react-router-dom";
 
 import { useStateValue } from "../../ContextApi/StateProvider";
+import { auth } from "../../Firebase/Firebase";
 
 function Header() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }] = useStateValue();
+
+  const login = () => {
+    if (user) {
+      auth.signOut();
+    }
+  };
+
   return (
     <div>
       <nav className="header">
@@ -32,10 +40,12 @@ function Header() {
         </div>
         {/*3 Links*/}
         <div className="header__nav">
-          <Link to="/login" className="header__link">
-            <div className="d-flex flex-column header__option">
-              <span className="header__optionLine_one">Hello Akash</span>
-              <span className="header__optionLine_two">Sign In</span>
+          <Link to={!user && "/login"} className="header__link">
+            <div onClick={login} className="d-flex flex-column header__option">
+              <span className="header__optionLine_one">Hello</span>
+              <span className="header__optionLine_two">
+                {user ? "Sign Out" : "Sign In"}
+              </span>
             </div>
           </Link>
           <Link to="/login" className="header__link">
