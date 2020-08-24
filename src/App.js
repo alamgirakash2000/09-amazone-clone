@@ -12,8 +12,7 @@ import { auth, database } from "./Firebase/Firebase";
 
 function App() {
   const [{ user, basket }, dispatch] = useStateValue();
-  const [myBasket, setMyBasket] = useState([]);
-  const [id, setId] = useState(localStorage.getItem("id"));
+  const [id, setId] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
@@ -21,11 +20,11 @@ function App() {
         database.collection("users").onSnapshot((snapshot) => {
           snapshot.docs.map((doc) => {
             if (doc.data().id === authUser.uid) {
-              doc.data().basket.map((product) => {
-                dispatch({
-                  type: "ADD",
-                  item: product,
-                });
+              console.log(doc.id);
+              setId(doc.id);
+              dispatch({
+                type: "ADD_ARRAY",
+                array: doc.data().basket,
               });
             }
           });
@@ -43,12 +42,19 @@ function App() {
         });
       }
     });
-
     return () => {
       // Any cleanup things
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (id && user) {
+      let datas = database.collection("users").doc(id).update({
+        basket: basket,
+      });
+    }
+  }, [basket]);
 
   return (
     <Router>

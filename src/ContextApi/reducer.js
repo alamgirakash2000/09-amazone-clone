@@ -41,6 +41,11 @@ const reducer = (state, action) => {
         ...state,
         basket: [],
       };
+    case "ADD_ARRAY":
+      return {
+        ...state,
+        basket: action.array,
+      };
     default:
       return state;
   }

@@ -8,8 +8,8 @@ function Subtotal() {
   return (
     <div className="subtotal">
       <h5>
-        Subtotal{` (${basket?.length} items)`}:
-        <strong>$ {getBasketTotal(basket).toFixed(2)}</strong>
+        Subtotal({basket?.length}):
+        <strong> ${getBasketTotal(basket).toFixed(2)} </strong>
       </h5>
       <small className="subtotal__gift">
         <input type="checkbox" /> This order contains a gift
