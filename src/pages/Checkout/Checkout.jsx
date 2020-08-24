@@ -29,7 +29,7 @@ function Checkout() {
               <hr />
 
               {/* List out all the checkout items */}
-              {basket.map((item) => (
+              {basket?.map((item) => (
                 <CheckoutProducts product={item} />
               ))}
             </div>

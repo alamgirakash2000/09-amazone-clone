@@ -6,9 +6,13 @@ import { useStateValue } from "../../ContextApi/StateProvider";
 import { auth } from "../../Firebase/Firebase";
 
 function Header() {
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }, dispath] = useStateValue();
 
   const login = () => {
+    localStorage.removeItem("id");
+    dispath({
+      type: "EMPTY",
+    });
     if (user) {
       auth.signOut();
     }

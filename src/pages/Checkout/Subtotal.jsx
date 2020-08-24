@@ -8,7 +8,7 @@ function Subtotal() {
   return (
     <div className="subtotal">
       <h5>
-        Subtotal{` (${basket?.length} items)`}:{" "}
+        Subtotal{` (${basket?.length} items)`}:
         <strong>$ {getBasketTotal(basket).toFixed(2)}</strong>
       </h5>
       <small className="subtotal__gift">

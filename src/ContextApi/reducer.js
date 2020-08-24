@@ -1,3 +1,5 @@
+import { database } from "../Firebase/Firebase";
+
 export const initialState = {
   basket: [],
   user: null,
@@ -12,7 +14,6 @@ export const getBasketTotal = (basket) => {
 };
 
 const reducer = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case "SET_USER":
       return {
@@ -35,6 +36,11 @@ const reducer = (state, action) => {
         console.warn(`Can't remove the product of id: ${action.id}.`);
       }
       return { ...state, basket: newBasket };
+    case "EMPTY":
+      return {
+        ...state,
+        basket: [],
+      };
     default:
       return state;
   }

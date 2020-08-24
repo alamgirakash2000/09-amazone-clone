@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./Login.style.css";
-import { auth } from "../../Firebase/Firebase";
+import { auth, database } from "../../Firebase/Firebase";
+import firebase from "firebase";
 
 function Login() {
   const history = useHistory();
@@ -13,6 +14,7 @@ function Login() {
     auth
       .signInWithEmailAndPassword(email, password)
       .then((auth) => {
+        localStorage.setItem("id", auth.user.uid);
         // Logged in, redirect to homepage
         history.push("/");
       })
@@ -26,8 +28,13 @@ function Login() {
 
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((auth) => {
+      .then(async (auth) => {
+        localStorage.setItem("id", auth.user.uid);
         // Logged in, redirect to homepage
+        await database.collection("users").add({
+          id: auth.user.uid,
+          basket: [],
+        });
         history.push("/");
       })
       .catch((err) => {

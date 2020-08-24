@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -8,18 +8,32 @@ import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
 
 import { useStateValue } from "./ContextApi/StateProvider";
-import { auth } from "./Firebase/Firebase";
+import { auth, database } from "./Firebase/Firebase";
 
 function App() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ user, basket }, dispatch] = useStateValue();
+  const [myBasket, setMyBasket] = useState([]);
+  const [id, setId] = useState(localStorage.getItem("id"));
 
   useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
+        database.collection("users").onSnapshot((snapshot) => {
+          snapshot.docs.map((doc) => {
+            if (doc.data().id === authUser.uid) {
+              doc.data().basket.map((product) => {
+                dispatch({
+                  type: "ADD",
+                  item: product,
+                });
+              });
+            }
+          });
+        });
         // The user is logged in
         dispatch({
           type: "SET_USER",
-          user: authUser,
+          user: authUser.uid,
         });
       } else {
         // the user is logged out
@@ -29,7 +43,13 @@ function App() {
         });
       }
     });
+
+    return () => {
+      // Any cleanup things
+      unsubscribe();
+    };
   }, []);
+
   return (
     <Router>
       <div className="app">
