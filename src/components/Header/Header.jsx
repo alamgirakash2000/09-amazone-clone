@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../../ContextApi/StateProvider";
 import { auth } from "../../Firebase/Firebase";
 
-function Header() {
+function Header({ searchedText, setSearchedText }) {
   const [{ basket, user }, dispath] = useStateValue();
 
   const login = () => {
@@ -19,7 +19,7 @@ function Header() {
   };
 
   return (
-    <div>
+    <div className="position-sticky sticky-top">
       <nav className="header">
         {/*Logo on the left ->img*/}
         <Link to="/">
@@ -35,6 +35,10 @@ function Header() {
             type="text"
             className="form-control"
             aria-describedby="basic-addon2"
+            value={searchedText}
+            onChange={(e) => {
+              setSearchedText(e.target.value);
+            }}
           />
           <div className="input-group-append">
             <span className="input-group-text" id="basic-addon2">
