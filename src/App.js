@@ -6,16 +6,14 @@ import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
 import Checkout from "./pages/Checkout/Checkout";
 import Login from "./pages/Login/Login";
-import fakeData from "./fakeData/index";
 import MyOrders from "./pages/MyOrders/MyOrders";
 import { useStateValue } from "./ContextApi/StateProvider";
-import { auth } from "./Firebase/Firebase";
 import Shipment from "./components/Shipment/Shipment";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import axios from "./axios";
 
 function App() {
-  const [{ user, basket }, dispatch] = useStateValue();
+  const [{ basket }, dispatch] = useStateValue();
   const [products, setProducts] = useState([]);
   const [searchedText, setSearchedText] = useState("");
 
@@ -27,19 +25,15 @@ function App() {
       })
       .catch((err) => console.log(err.msg));
 
-    if (localStorage.getItem("amazon_basket") !== "null") {
-      dispatch({
-        type: "SET_USER",
-        user: JSON.parse(localStorage.getItem("amazon_user")),
-      });
-    }
+    dispatch({
+      type: "SET_USER",
+      user: JSON.parse(localStorage.getItem("amazon_user")) || null,
+    });
 
-    if (localStorage.getItem("amazon_basket") !== "null") {
-      dispatch({
-        type: "SET_BASKET",
-        basket: JSON.parse(localStorage.getItem("amazon_basket")),
-      });
-    }
+    dispatch({
+      type: "SET_BASKET",
+      basket: JSON.parse(localStorage.getItem("amazon_basket")) || [],
+    });
   }, []);
 
   useEffect(() => {
