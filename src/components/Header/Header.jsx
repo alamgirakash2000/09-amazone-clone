@@ -6,15 +6,20 @@ import { useStateValue } from "../../ContextApi/StateProvider";
 import { auth } from "../../Firebase/Firebase";
 
 function Header({ searchedText, setSearchedText }) {
-  const [{ basket, user }, dispath] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
 
   const login = () => {
     localStorage.removeItem("id");
-    dispath({
+    dispatch({
       type: "EMPTY",
     });
     if (user) {
       auth.signOut();
+      dispatch({
+        type: "SET_USER",
+        user: null,
+      });
+      localStorage.removeItem("amazon_user");
     }
   };
 
@@ -30,7 +35,7 @@ function Header({ searchedText, setSearchedText }) {
           />
         </Link>
         {/*Search Box*/}
-        <div className="input-group my-auto">
+        <div className="input-group my-auto d-md-flex d-none">
           <input
             type="text"
             className="form-control"
@@ -47,7 +52,7 @@ function Header({ searchedText, setSearchedText }) {
           </div>
         </div>
         {/*3 Links*/}
-        <div className="header__nav">
+        <div className="header__nav ml-auto">
           <Link to={!user && "/login"} className="header__link">
             <div onClick={login} className="d-flex flex-column header__option">
               <span className="header__optionLine_one">Hello {user?.name}</span>
@@ -56,23 +61,16 @@ function Header({ searchedText, setSearchedText }) {
               </span>
             </div>
           </Link>
-          <Link to="/login" className="header__link">
+          <Link to="/myorders" className="header__link">
             <div className="d-flex flex-column header__option">
               <span className="header__optionLine_one">Returns</span>
               <span className="header__optionLine_two">& Orders</span>
             </div>
           </Link>
-          <Link to="/login" className="header__link">
-            <div className="d-flex flex-column header__option">
-              <span className="header__optionLine_one">Your</span>
-              <span className="header__optionLine_two">Prime</span>
-            </div>
-          </Link>
-
           <Link to="/checkout" className="header__link">
             <div className="header__optionBasket">
               <span>
-                <i class="fas fa-shopping-cart fa-2x"></i>
+                <i className="fas fa-shopping-cart fa-2x"></i>
               </span>
               <span className="mx-2">{basket?.length}</span>
             </div>

@@ -33,6 +33,15 @@ function Login() {
             phone: phoneNumber,
           },
         });
+
+        localStorage.setItem(
+          "amazon_user",
+          JSON.stringify({
+            name: displayName,
+            email,
+            phone: phoneNumber,
+          })
+        );
         // Logged in, redirect to homepage
         history.replace(from);
       })
@@ -76,6 +85,14 @@ function Login() {
                 phone: phoneNumber,
               },
             });
+            localStorage.setItem(
+              "amazon_user",
+              JSON.stringify({
+                name: displayName,
+                email,
+                phone: phoneNumber,
+              })
+            );
           });
 
         alert("Successfully registered");

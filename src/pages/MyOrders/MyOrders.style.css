@@ -1,0 +1,21 @@
+.order__list {
+  list-style: none;
+}
+
+.order {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(5, 124, 45, 0.801);
+  margin-top: 1rem;
+  border-radius: 20px;
+  width: 90%;
+  padding: 1rem;
+}
+.order:hover {
+  background: rgba(6, 51, 21, 0.801);
+}
+
+.order__date {
+  color: rgb(133, 247, 27);
+}

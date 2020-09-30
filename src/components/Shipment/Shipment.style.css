@@ -1,0 +1,8 @@
+.shipment__form {
+  width: 80%;
+  margin: auto;
+}
+
+.shipment__form input {
+  background-color: #f1f1f1 !important;
+}

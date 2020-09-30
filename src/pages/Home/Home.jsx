@@ -15,9 +15,7 @@ function Home({ products }) {
       <div className="row z-index-1">
         {products.length > 0 ? (
           products.map((product) => (
-            <div className="col-lg-4 col-md-6">
-              <Product key={product.id} props={product} />
-            </div>
+            <Product key={product._id} props={product} />
           ))
         ) : (
           <h2 className="text-center ml-5">Sorry!! No products found.</h2>

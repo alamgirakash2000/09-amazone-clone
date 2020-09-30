@@ -25,5 +25,6 @@
 .product__button {
   background-color: #f0c14b;
   border: 1px solid;
+  padding: 0.4rem 1rem;
   border-color: #a88734 #9c7e31 #846a29;
 }
