@@ -27,15 +27,19 @@ function App() {
       })
       .catch((err) => console.log(err.msg));
 
-    dispatch({
-      type: "SET_USER",
-      user: JSON.parse(localStorage.getItem("amazon_user")),
-    });
+    if (localStorage.getItem("amazon_basket")) {
+      dispatch({
+        type: "SET_USER",
+        user: JSON.parse(localStorage.getItem("amazon_user")),
+      });
+    }
 
-    dispatch({
-      type: "SET_BASKET",
-      basket: JSON.parse(localStorage.getItem("amazon_basket")),
-    });
+    if (localStorage.getItem("amazon_basket")) {
+      dispatch({
+        type: "SET_BASKET",
+        basket: JSON.parse(localStorage.getItem("amazon_basket")),
+      });
+    }
   }, []);
 
   useEffect(() => {
