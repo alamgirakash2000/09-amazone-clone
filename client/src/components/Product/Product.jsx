@@ -8,14 +8,17 @@ function Product({ props }) {
   const addToBasket = () => {
     // Add item to a basket
     dispatch({
-      type: "ADD",
-      item: {
-        id: props.key,
-        title: props.name,
-        image: props.img,
-        price: props.price,
-        rating: props.star,
-      },
+      type: "SET_BASKET",
+      basket: [
+        ...basket,
+        {
+          id: props.key,
+          title: props.name,
+          image: props.img,
+          price: props.price,
+          rating: props.star,
+        },
+      ],
     });
   };
 

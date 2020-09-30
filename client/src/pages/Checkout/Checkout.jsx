@@ -31,7 +31,7 @@ function Checkout() {
 
               {/* List out all the checkout items */}
               {basket?.map((item) => (
-                <CheckoutProducts product={item} />
+                <CheckoutProducts key={item.id} product={item} />
               ))}
             </div>
           )}

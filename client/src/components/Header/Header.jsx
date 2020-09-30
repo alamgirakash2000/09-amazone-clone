@@ -42,7 +42,7 @@ function Header({ searchedText, setSearchedText }) {
           />
           <div className="input-group-append">
             <span className="input-group-text" id="basic-addon2">
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
             </span>
           </div>
         </div>
@@ -50,7 +50,7 @@ function Header({ searchedText, setSearchedText }) {
         <div className="header__nav">
           <Link to={!user && "/login"} className="header__link">
             <div onClick={login} className="d-flex flex-column header__option">
-              <span className="header__optionLine_one">Hello</span>
+              <span className="header__optionLine_one">Hello {user?.name}</span>
               <span className="header__optionLine_two">
                 {user ? "Sign Out" : "Sign In"}
               </span>

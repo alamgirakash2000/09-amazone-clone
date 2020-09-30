@@ -16,7 +16,7 @@ function Home({ products }) {
         {products.length > 0 ? (
           products.map((product) => (
             <div className="col-lg-4 col-md-6">
-              <Product props={product} />
+              <Product key={product.id} props={product} />
             </div>
           ))
         ) : (

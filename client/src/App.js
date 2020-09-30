@@ -10,47 +10,25 @@ import Login from "./pages/Login/Login";
 import fakeData from "./fakeData/index";
 
 import { useStateValue } from "./ContextApi/StateProvider";
-import { auth, database } from "./Firebase/Firebase";
+import { auth } from "./Firebase/Firebase";
+import Shipment from "./components/Shipment/Shipment";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
 function App() {
   const [{ user, basket }, dispatch] = useStateValue();
   const [products, setProducts] = useState([...fakeData]);
   const [searchedText, setSearchedText] = useState("");
-  const [id, setId] = useState("");
 
   useEffect(() => {
-    console.log(products);
-    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      if (authUser) {
-        database.collection("users").onSnapshot((snapshot) => {
-          snapshot.docs.map((doc) => {
-            if (doc.data().id === authUser.uid) {
-              setId(doc.id);
-              dispatch({
-                type: "ADD_ARRAY",
-                array: doc.data().basket,
-              });
-            }
-          });
-        });
-        // The user is logged in
-        dispatch({
-          type: "SET_USER",
-          user: authUser.uid,
-        });
-      } else {
-        // the user is logged out
-        dispatch({
-          type: "SET_USER",
-          user: null,
-        });
-      }
+    dispatch({
+      type: "SET_BASKET",
+      basket: JSON.parse(localStorage.getItem("amazon_basket")),
     });
-    return () => {
-      // Any cleanup things
-      unsubscribe();
-    };
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("amazon_basket", JSON.stringify(basket));
+  }, [basket]);
 
   useEffect(() => {
     const setFilteredProducts = async () => {
@@ -60,37 +38,23 @@ function App() {
       await setProducts(filteredProducts);
     };
     setFilteredProducts();
-    console.log(products);
   }, [searchedText]);
-
-  useEffect(() => {
-    if (id && user) {
-      let datas = database.collection("users").doc(id).update({
-        basket: basket,
-      });
-    }
-  }, [basket]);
-  console.log(fakeData);
 
   return (
     <Router>
       <div className="app">
+        <Header searchedText={searchedText} setSearchedText={setSearchedText} />
         <Switch>
           <Route path="/checkout">
-            <Header
-              searchedText={searchedText}
-              setSearchedText={setSearchedText}
-            />
             <Checkout />
           </Route>
           <Route path="/login">
             <Login />
           </Route>
+          <PrivateRoute path="/shipment">
+            <Shipment />
+          </PrivateRoute>
           <Route exact path="/">
-            <Header
-              searchedText={searchedText}
-              setSearchedText={setSearchedText}
-            />
             <Home products={products} />
           </Route>
         </Switch>

@@ -38,6 +38,7 @@
 }
 .header__link:hover {
   text-decoration: none;
+  color: tomato;
 }
 .header__optionLine_one {
   font-size: 10px;
