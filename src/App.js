@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
 
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";

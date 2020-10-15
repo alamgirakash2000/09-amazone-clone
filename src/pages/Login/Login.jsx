@@ -19,6 +19,14 @@ function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  if (localStorage.getItem("amazon_user")) {
+    dispatch({
+      type: "SET_USER",
+      user: JSON.parse(localStorage.getItem("amazon_user")),
+    });
+    history.replace(from);
+  }
+
   const login = (e) => {
     e.preventDefault();
     auth
