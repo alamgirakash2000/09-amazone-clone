@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
-import Skeleton from "react-loading-skeleton";
 
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
@@ -17,12 +16,15 @@ function App() {
   const [{ basket }, dispatch] = useStateValue();
   const [products, setProducts] = useState([]);
   const [searchedText, setSearchedText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     axios
-      .get("/api/products")
+      .get(`/api/products?skip=0`)
       .then((res) => {
         setProducts(res.data);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err.msg));
 
@@ -53,7 +55,12 @@ function App() {
 
   return (
     <Router>
-      <div className="app">
+      {isLoading && (
+        <div className="loading">
+          <h1>Data Loading...</h1>
+        </div>
+      )}
+      <div className={`app ${isLoading && "d-none"}`}>
         <Header searchedText={searchedText} setSearchedText={setSearchedText} />
         <Switch>
           <Route path="/checkout">
@@ -69,7 +76,7 @@ function App() {
             <MyOrders />
           </PrivateRoute>
           <Route exact path="/">
-            <Home products={products} />
+            <Home products={products} setProducts={setProducts} />
           </Route>
         </Switch>
       </div>
