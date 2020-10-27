@@ -28,4 +28,6 @@
              <li> Firebase
                <li> Context API
                  <li> Material UI
+	           <li> Bootstrap
+		    <li>Local Storage
  </ul>
