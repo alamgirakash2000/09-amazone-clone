@@ -1,4 +1,4 @@
-<h1>Amazon Simple - <small>A full stack E-commerce site</small></h1> 
+<h1>Amazon Simple</h1>  - <h4>-A full stack E-commerce site</h4>
    <ul> 
 	  <li> <a target="_blank" href="https://alamgirakash2000.github.io/09-amazone-clone/"> Live Website Link</a>
 	  <li> <a target="_blank" href="https://github.com/alamgirakash2000/09-amazone-clone"> Client Side Code Link</a>
